@@ -1,0 +1,42 @@
+import rtconfig
+from building import *
+
+# get current directory
+cwd = GetCurrentDir()
+
+# The set of source files associated with this SConscript file.
+
+src = Split('''
+Device/MegaHunt/mhscpu/Source/system_mhscpu.c
+MHSCPU_Driver/src/misc.c
+MHSCPU_Driver/src/mhscpu_sysctrl.c
+MHSCPU_Driver/src/mhscpu_uart.c
+MHSCPU_Driver/src/mhscpu_gpio.c
+MHSCPU_Driver/src/mhscpu_rtc.c
+MHSCPU_Driver/src/mhscpu_dma.c
+MHSCPU_Driver/src/mhscpu_qspi.c
+MHSCPU_Driver/src/mhscpu_cache.c
+MHSCPU_Driver/src/mhscpu_dcmi.c
+MHSCPU_Driver/src/mhscpu_i2c.c
+MHSCPU_Driver/src/mhscpu_timer.c
+MHSCPU_Driver/src/mhscpu_exti.c
+MHSCPU_Driver/src/mhscpu_wdt.c
+''')
+
+# add for startup script
+if rtconfig.CROSS_TOOL == 'gcc':
+    src += ['Device/MegaHunt/mhscpu/Source/GCC/startup_mhscpu.s']
+elif rtconfig.CROSS_TOOL == 'keil':
+    src += ['Device/MegaHunt/mhscpu/Source/ARM/startup_mhscpu.s']
+elif rtconfig.CROSS_TOOL == 'iar':
+    src += ['Device/MegaHunt/mhscpu/Source/IAR/startup_mhscpu.s']
+
+path = [cwd + '/MHSCPU_Driver/inc',
+    cwd + '/CMSIS/Include',
+    cwd + '/Device/MegaHunt/mhscpu/Include']
+
+
+CPPDEFINES = ['USE_STDPERIPH_DRIVER']
+group = DefineGroup('Libraries', src, depend = [''], CPPPATH = path, CPPDEFINES = CPPDEFINES)
+
+Return('group')

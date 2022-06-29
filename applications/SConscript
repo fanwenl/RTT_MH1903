@@ -1,0 +1,22 @@
+# -*- coding:utf-8 -*-
+#
+# Copyright (c) 2022, Wenlong Fan (fanwenl@foxmail.com). All rights reserved.
+# All rights reserved.
+#
+# Change logs:
+# Date          Author          Notes
+# 2022-06-17    fanwenl         The first version.
+
+import rtconfig
+from building import *
+
+cwd     = GetCurrentDir()
+CPPPATH = [cwd, str(Dir('#'))]
+src     = Split("""
+main.c""")
+
+path =  [cwd]
+
+group = DefineGroup('Applications', src, depend = [''], CPPPATH = path)
+
+Return('group')

@@ -1,0 +1,47 @@
+# -*- coding:utf-8 -*-
+#
+# Copyright (c) 2022, Wenlong Fan (fanwenl@foxmail.com). All rights reserved.
+# All rights reserved.
+#
+# Change logs:
+# Date          Author          Notes
+# 2022-06-17    fanwenl         The first version.
+
+import os
+import rtconfig
+from building import *
+
+cwd = GetCurrentDir()
+
+# add general drivers
+src = Split('''
+board.c
+''')
+
+
+if GetDepend(['RT_USING_SERIAL']):
+    src += Glob('drv_usart.c')
+
+if GetDepend('BSP_USING_ON_CHIP_FLASH'):
+    src += Glob('drv_flash.c')
+
+if GetDepend(['RT_USING_PIN']):
+    src += ['drv_gpio.c']
+
+if GetDepend('BSP_USING_ONCHIP_RTC'):
+    src += ['drv_rtc.c']
+
+if GetDepend(['BSP_USING_WDT']):
+    src += ['drv_wdt.c']
+
+if GetDepend(['BSP_USING_PWM']):
+    src += ['drv_pwm.c']
+
+
+path =  [cwd]
+path += [cwd + '/ports']
+
+CPPDEFINES = ['']
+group = DefineGroup('Drivers', src, depend = [''], CPPPATH = path, CPPDEFINES = CPPDEFINES)
+
+Return('group')

@@ -1,0 +1,27 @@
+[
+ {
+  "path": "/packages/iot/ota_downloader", 
+  "ver": "v1.0.0", 
+  "name": "OTA_DOWNLOADER"
+ }, 
+ {
+  "path": "/packages/security/tinycrypt", 
+  "ver": "v1.0.0", 
+  "name": "TINYCRYPT"
+ }, 
+ {
+  "path": "/packages/system/fal", 
+  "ver": "v0.5.0", 
+  "name": "FAL"
+ }, 
+ {
+  "path": "/packages/misc/fastlz", 
+  "ver": "v1.0.1", 
+  "name": "FASTLZ"
+ }, 
+ {
+  "path": "/packages/misc/quicklz", 
+  "ver": "v1.0.1", 
+  "name": "QUICKLZ"
+ }
+]
