@@ -1,6 +1,8 @@
 /**
  * Copyright (c) 2022, Wenlong Fan (fanwenl@foxmail.com). All rights reserved.
  *
+ * SPDX-License-Identifier: Apache-2.0
+ *
  * Change logs:
  * Date          Author          Notes
  * 2022-06-17    fanwenl         The first version.
